@@ -724,37 +724,41 @@ servicename:
     # -- Create NetworkPolicy object for the app.
     # @section -- Servicename
     create: false
-    # -- Policy types used in the NetworkPolicy object.
-    # @section -- Servicename
-    policyTypes:
-    - Ingress
     # -- Ingress rules for the NetworkPolicy object.
     # @section -- Servicename
     ingress: []
-    # - from:
+    # -- Ingress mode for the NetworkPolicy object.
+    # @section -- Servicename
+    #   mode: "rules | deny-all | allow-all"
+    # @default -- `"rules"`
+    #   rules: []
     #   - ipBlock:
     #       cidr: 172.17.0.0/16
     #       except:
     #       - 172.17.1.0/24
-    #   - namespaceSelector:
-    #       matchLabels:
-    #         project: myproject
-    #   - podSelector:
-    #       matchLabels:
-    #         role: frontend
-    #   ports:
-    #   - protocol: TCP
-    #     port: 6379
+    #     namespaceLabel:
+    #       project: myproject
+    #     ports:
+    #     - 3000
+    #   - podLabel:
+    #       role: frontend
+    #     ports:
+    #     - protocol: TCP
+    #       port: 6379
     # -- Egress rules for the NetworkPolicy object.
     # @section -- Servicename
     egress: []
-    # - to:
+    # -- Ingress mode for the NetworkPolicy object.
+    # @section -- Servicename
+    #   mode: "rules | deny-all | allow-all"
+    # @default -- `"rules"`
+    #   rules: []
     #   - ipBlock:
     #       cidr: 10.0.0.0/24
-    #   ports:
-    #   - protocol: TCP
-    #     port: 32000
-    #     endPort: 32768
+    #     ports:
+    #     - protocol: TCP
+    #       port: 32000
+    #       endPort: 32768
   metrics:
     # -- Deploy metrics service.
     # @section -- Servicename
