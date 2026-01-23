@@ -25,17 +25,17 @@ spec:
   {{- if eq .Values.servicename.networkPolicy.ingress.mode "rules" }}
   {{- range $ingress := .Values.servicename.networkPolicy.ingress.rules }}
   - from:
-    {{- with $ingress.podLabel }}
+    {{- range $ingress.podLabel }}
     - podSelector:
         matchLabels:
         {{- toYaml . | nindent 10 }}
     {{- end }}
-    {{- with $ingress.namespaceLabel }}
+    {{- range $ingress.namespaceLabel }}
     - namespaceSelector:
         matchLabels:
         {{- toYaml . | nindent 10 }}
     {{- end }}
-    {{- with $ingress.ipBlock }}
+    {{- range $ingress.ipBlock }}
     - ipBlock:
         cidr: {{ .cidr }}
         {{- if (.except) }}
@@ -55,7 +55,7 @@ spec:
       port: {{ $ports.port}}
     {{- else }}
     - protocol: TCP
-      port: {{ $ports }}
+      port: {{ . }}
     {{- end }}
     {{- end }}
     {{- end }}
@@ -69,17 +69,17 @@ spec:
   {{- if eq .Values.servicename.networkPolicy.egress.mode "rules" }}
   {{- range $egress := .Values.servicename.networkPolicy.egress.rules }}
   - to:
-    {{- with $egress.podLabel }}
+    {{- range $egress.podLabel }}
     - podSelector:
         matchLabels:
         {{- toYaml . | nindent 10 }}
     {{- end }}
-    {{- with $egress.namespaceLabel }}
+    {{- range $egress.namespaceLabel }}
     - namespaceSelector:
         matchLabels:
         {{- toYaml . | nindent 10 }}
     {{- end }}
-    {{- with $egress.ipBlock }}
+    {{- range $egress.ipBlock }}
     - ipBlock:
         cidr: {{ .cidr }}
         {{- if (.except) }}
@@ -106,7 +106,7 @@ spec:
     {{- end }}
     {{- else }}
     - protocol: TCP
-      port: {{ $ports }}
+      port: {{ . }}
     {{- end }}
     {{- end }}
     {{- end }}

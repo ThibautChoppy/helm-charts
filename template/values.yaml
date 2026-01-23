@@ -733,15 +733,17 @@ servicename:
     # @default -- `"rules"`
     #   rules: []
     #   - ipBlock:
-    #       cidr: 172.17.0.0/16
-    #       except:
-    #       - 172.17.1.0/24
+    #       - cidr: 172.17.0.0/16
+    #         except:
+    #         - 172.17.1.0/24
     #     namespaceLabel:
-    #       project: myproject
+    #       - project: myproject
     #     ports:
     #     - 3000
     #   - podLabel:
-    #       role: frontend
+    #       - role: frontend
+    #         app: nginx
+    #       - app: api
     #     ports:
     #     - protocol: TCP
     #       port: 6379
@@ -754,7 +756,7 @@ servicename:
     # @default -- `"rules"`
     #   rules: []
     #   - ipBlock:
-    #       cidr: 10.0.0.0/24
+    #       - cidr: 10.0.0.0/24
     #     ports:
     #     - protocol: TCP
     #       port: 32000
